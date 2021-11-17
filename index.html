@@ -5,6 +5,39 @@
     <title>Title</title>
 </head>
 <body>
-<script src="xhr.js"></script>
+
+<a id="ad-link-1" href=""><img id="ad-img-1" src="" alt=""></a>
+<a id="ad-link-2" href=""><img id="ad-img-2" src="" alt=""></a>
+<a id="ad-link-3" href=""><img id="ad-img-3" src="" alt=""></a>
+
+
+<script>
+
+
+    const url_lib = 'https://cors-anywhere.herokuapp.com/https://reliability.rebelmouse.dev/customfeeds/feed/ads-feed/json'
+
+
+    async function getAd() {
+        const response = await fetch(url_lib);
+        const data = await response.json();
+        const range = await Math.ceil(Math.random()*5);
+        const events = await data.events[range];
+
+        const { horizontalImageURL, sidebarImageURL, linkoutURL} = await events;
+        document.getElementById('ad-link-1').href = await decodeURIComponent(linkoutURL);
+        document.getElementById('ad-img-1').src = await horizontalImageURL;
+
+
+        document.getElementById('ad-link-2').href = await decodeURIComponent(linkoutURL);
+        document.getElementById('ad-img-2').src = await sidebarImageURL;
+
+
+        document.getElementById('ad-link-3').href = await decodeURIComponent(linkoutURL);
+        document.getElementById('ad-img-3').src = await sidebarImageURL;
+    }
+
+getAd();
+
+</script>
 </body>
 </html>
